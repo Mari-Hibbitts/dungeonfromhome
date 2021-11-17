@@ -29,10 +29,6 @@ boolean wkey, skey, akey, dkey, spacekey, select, pause, mapkey;
 // =============================== objects
 ArrayList<GameObjects> myObjects;
 Hero myHero;
-Follower follower;
-Spawner spawner;
-Lurker lurker;
-Enemy enemy;
 ArrayList<Darkness> darkness;
 
 
@@ -82,16 +78,12 @@ void setup() {
 
   //================= objects
   myHero = new Hero();
-  follower = new Follower(150,1, 2, width/2, height/2);
-  lurker = new Lurker(2, 1, width/2, height/2);
-  spawner = new Spawner(1, 3);
-  enemy = new Enemy(20, 420);
   myObjects = new ArrayList<GameObjects>();
   myObjects.add(myHero);
-  myObjects.add (enemy);
-  myObjects.add(follower);
-  myObjects.add(lurker);
-  myObjects.add(spawner);
+  myObjects.add (new Enemy(20, 420));
+  myObjects.add(new Follower (150, 1, 2, width/2, height/2));
+  myObjects.add(new Lurker(2, 1, width/2, height/2));
+  myObjects.add(new Spawner(1, 3));
 
   //darkness
   darkness = new ArrayList<Darkness>();

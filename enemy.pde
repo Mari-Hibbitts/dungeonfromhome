@@ -31,7 +31,13 @@ class Enemy extends GameObjects {
 
   void act() {
     super.act();
-  
+    if (myHero.immune == false){
+       if (dist(loc.x, loc.y, myHero.loc.x, myHero.loc.y)< size/2+myHero.size/2 && roomX == myHero.roomX && roomY == myHero.roomY) {
+        myHero.hp = myHero.hp -1;
+        println("yargh");
+        myHero.immune = true;
+      }
+    }
     int i = 0;
     while (i < myObjects.size()) {
       GameObjects obj = myObjects.get(i);
