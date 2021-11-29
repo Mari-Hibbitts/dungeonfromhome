@@ -21,4 +21,19 @@ class GameObjects {
     if (loc.y > 497) loc.y = 496;
     if (loc.y < 102) loc.y = 103;
   }
+
+  boolean inRoomWith(GameObjects obj) {
+    if (roomX == obj.roomX && roomY == obj.roomY)
+      return true;
+    else
+      return false;
+  }
+
+  boolean isCollidingWith(GameObjects obj) {
+    float d = dist(obj.loc.x, obj.loc.y, loc.x, loc.y);
+    if (inRoomWith(obj) && d < size/2 + obj.size/2)
+      return true;
+    else
+      return false;
+  }
 }

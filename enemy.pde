@@ -43,12 +43,10 @@ class Enemy extends GameObjects {
     int i = 0;
     while (i < myObjects.size()) {
       GameObjects obj = myObjects.get(i);
-      if (obj instanceof Bullet) {
-        float d = dist(obj.loc.x, obj.loc.y, loc.x, loc.y);
-        if (d <= size/2 + obj.size/2) {
-          hp = hp - int(obj.vel.mag());
-          obj.hp = 0;
-        }
+      if (obj instanceof Bullet && isCollidingWith(obj)) {
+            hp = hp - int(obj.vel.mag());
+            obj.hp = 0;  
+        
       }
 
       i++;
