@@ -1,3 +1,2 @@
-void pause(){
-
+void pause() {
 }

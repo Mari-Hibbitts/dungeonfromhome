@@ -19,5 +19,5 @@ void keyReleased() {
   if (keyCode == ' ')    spacekey = false;
   if (key == 'p' || key == 'P') pause = false;
   if (key == 'a' || key == 'A') select = false;
-    if (key == 'M' || key == 'm') mapkey =  false;
+  if (key == 'M' || key == 'm') mapkey =  false;
 }

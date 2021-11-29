@@ -1,7 +1,7 @@
 class Enemy extends GameObjects {
 
   Enemy(int locx, int locy) {
-     loc = new PVector (locx, locy);
+    loc = new PVector (locx, locy);
     vel = new PVector (0, 0 );
     hp = 100;
     roomX = 1;
@@ -31,10 +31,12 @@ class Enemy extends GameObjects {
 
   void act() {
     super.act();
-    if (myHero.immune == false){
-       if (dist(loc.x, loc.y, myHero.loc.x, myHero.loc.y)< size/2+myHero.size/2 && roomX == myHero.roomX && roomY == myHero.roomY) {
-        myHero.hp = myHero.hp -1;
+    if (myHero.immune == false) {
+      if (dist(loc.x, loc.y, myHero.loc.x, myHero.loc.y)< size/2+myHero.size/2 && roomX == myHero.roomX && roomY == myHero.roomY) {
+        if (vel.mag() > 0) myHero.hp = myHero.hp - int(vel.mag());
+        if (vel.mag() <= 0) myHero.hp  = myHero.hp - 1;
         println("yargh");
+
         myHero.immune = true;
       }
     }
@@ -51,6 +53,9 @@ class Enemy extends GameObjects {
 
       i++;
     }
-  }
 
+    if (hp <=0) {
+      myObjects.add(new droppedItem(loc.x, loc.y, roomX, roomY));
+    }
+  }
 }

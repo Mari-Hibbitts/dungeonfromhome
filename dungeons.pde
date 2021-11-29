@@ -1,5 +1,10 @@
 //Marika H
 
+
+//setting variables
+int SHOTGUN_THRESHOLD = 100;
+int SHOTGUN_BULLETSPEED = 5;
+
 //buttons
 boolean mouseReleased;
 boolean hadPressed;
@@ -9,10 +14,14 @@ Button returnButton;
 
 
 // ====================== colors 
-color green  = #31710D;
-color red    = #BF1D1D;
-color black  = #000000;
-color white  = #FFFFFF;
+color green     = #31710D;
+color darkGreen = #15580C;
+color red       = #BF1D1D;
+color brightRed = #F70F0F;
+color brown     =  #812828;
+color darkBlue  = #1D0B67;
+color black     = #000000;
+color white     = #FFFFFF;
 color northRoom, eastRoom, southRoom, westRoom;
 
 //======================================= mode framework and controls
@@ -34,6 +43,10 @@ ArrayList<Darkness> darkness;
 
 //========================= gifs and images
 AnimatedGif Giff;
+AnimatedGif spriteUp;
+AnimatedGif spriteDown;
+AnimatedGif spriteLeft;
+AnimatedGif spriteRight;
 PImage room;
 PImage floor;
 PImage card1;
@@ -46,6 +59,7 @@ PImage doorN;
 PImage doorE; 
 PImage doorS;
 PImage doorW;
+PImage potion;
 
 //fonts ================
 PFont iFont;
@@ -55,11 +69,16 @@ void setup() {
   mode = GAME;
   size(800, 600, FX2D);
   Giff = new AnimatedGif(247, "gif1/frame_", "_delay-0.04s.png" );
+  spriteUp = new AnimatedGif (4, "sprite/up/sprite_", ".png");
+  spriteDown = new AnimatedGif (4, "sprite/down/sprite_", ".png");
+  spriteLeft = new AnimatedGif (4, "sprite/left/sprite_", ".png");
+  spriteRight = new AnimatedGif (4, "sprite/right/sprite_", ".png");
 
   //============================= buttons
   introButton  = new Button(iFont, "Begin", 400, 530, 300, 100, black, white);
   storyButton  = new Button(iFont, "Enter", 400, 530, 300, 100, black, white);
   returnButton  = new Button(iFont, "RETURN", 400, 530, 300, 100, black, white);
+
 
   // ==================== fonts and images
   iFont = createFont("OldLondon.ttf", 100);
@@ -74,18 +93,18 @@ void setup() {
   doorE = loadImage("doorE.png");
   doorS = loadImage("doorS.png");
   doorW = loadImage("doorW.png");
+  potion = loadImage("health4.png");
 
 
   //================= objects
   myHero = new Hero();
   myObjects = new ArrayList<GameObjects>();
   myObjects.add(myHero);
-  myObjects.add (new Enemy(20, 420));
   myObjects.add(new Follower (150, 1, 2, width/2, height/2));
-  myObjects.add(new Lurker(2, 1, width/2, height/2));
-  myObjects.add(new Spawner(1, 3));
 
   //darkness
+
+
   darkness = new ArrayList<Darkness>();
   int s = 5;
   int x = 0, y = 0;
@@ -95,6 +114,28 @@ void setup() {
     if (x >= width) {
       x = 0;
       y = y + 5;
+    }
+  }
+
+  //loading the enemies from map
+  x = 0;
+  y = 0;
+  while (y < map.height) {
+    color roomColor =  map.get(x, y);
+    if (roomColor == brown) {
+      myObjects.add(new Lurker(x, y, width/2, height/2));
+    }
+    if (roomColor == black) {
+      myObjects.add(new Spawner(x, y));
+    }
+
+    if (roomColor == darkBlue) {
+      myObjects.add(new Bat(100, x, y, width/2, height/2));
+    }
+    x++;
+    if (x == map.width) {
+      x = 0;
+      y++;
     }
   }
 }

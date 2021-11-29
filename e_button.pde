@@ -28,7 +28,7 @@ class Button {
       fill(normal);
       stroke(highlight);
     }
-    
+
     strokeWeight(4);
     rect(x, y, w, h);
 
