@@ -5,11 +5,13 @@ class Hero extends GameObjects {
   boolean immune;
   int immunetime = 0;
   color c;
+  
   Hero() {
     super();
-    hp = 100;
+    hpMAX = hp = 100;
     loc = new PVector (50, 50);
     speed = 5;
+    damage = 5;
     roomX = 1;
     roomY = 1;
     size = 40;
@@ -94,6 +96,6 @@ class Hero extends GameObjects {
     if (hp <=0) {
       mode = GAMEOVER;
     }
-    if (hp >=100) hp = 100;
+    if (hp > hpMAX) hp = hpMAX;
   }
 }

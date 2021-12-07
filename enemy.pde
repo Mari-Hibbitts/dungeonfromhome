@@ -7,6 +7,7 @@ class Enemy extends GameObjects {
     roomX = 1;
     roomY = 1;
     size = 45;
+
   }
 
   Enemy(int _hp, int s, int x, int y) {
@@ -46,7 +47,7 @@ class Enemy extends GameObjects {
     while (i < myObjects.size()) {
       GameObjects obj = myObjects.get(i);
       if (obj instanceof Bullet && isCollidingWith(obj)) {
-        hp = hp - int(obj.vel.mag());
+        hp = hp - myHero.damage;
         obj.hp = 0;
       }
       i++;
