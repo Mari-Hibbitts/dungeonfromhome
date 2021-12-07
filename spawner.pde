@@ -18,5 +18,6 @@ class Spawner extends Enemy {
       myObjects.add(new Follower(40, roomX, roomY, int(loc.x), int(loc.y)));  
       timer = 0;
     }
+    if (hp<=0) myObjects.add(new droppedItem(loc.x, loc.y, roomX, roomY));
   }
 }

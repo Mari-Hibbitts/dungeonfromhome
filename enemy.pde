@@ -31,11 +31,13 @@ class Enemy extends GameObjects {
 
   void act() {
     super.act();
+    
+    //money
+    if (hp <=0) money = money + 1;
     if (myHero.immune == false) {
       if (dist(loc.x, loc.y, myHero.loc.x, myHero.loc.y)< size/2+myHero.size/2 && roomX == myHero.roomX && roomY == myHero.roomY) {
         if (vel.mag() > 0) myHero.hp = myHero.hp - int(vel.mag());
         if (vel.mag() <= 0) myHero.hp  = myHero.hp - 1;
-        println("yargh");
 
         myHero.immune = true;
       }
@@ -44,16 +46,12 @@ class Enemy extends GameObjects {
     while (i < myObjects.size()) {
       GameObjects obj = myObjects.get(i);
       if (obj instanceof Bullet && isCollidingWith(obj)) {
-            hp = hp - int(obj.vel.mag());
-            obj.hp = 0;  
-        
+        hp = hp - int(obj.vel.mag());
+        obj.hp = 0;
       }
-
       i++;
     }
 
-    if (hp <=0) {
-      myObjects.add(new droppedItem(loc.x, loc.y, roomX, roomY));
-    }
+    
   }
 }

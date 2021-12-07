@@ -3,6 +3,7 @@ class Bullet extends GameObjects {
 
   PVector aim;
   int timer;
+  PImage weaponType;
 
   Bullet(PVector _aim, color _c, int _s) {
     super();
@@ -15,11 +16,12 @@ class Bullet extends GameObjects {
     vel.setMag(5);
     roomX = myHero.roomX;
     roomY = myHero.roomY;
+    weaponType = loadImage("rock.png");
   }
 
   void show() {
     fill(c);
-    circle(loc.x, loc.y, size);
+    image(weaponType, loc.x, loc.y, size, size);
   }
 
   void act() {

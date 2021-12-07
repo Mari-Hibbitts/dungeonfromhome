@@ -1,6 +1,5 @@
 //Marika H
 
-
 //setting variables
 int SHOTGUN_THRESHOLD = 100;
 int SHOTGUN_BULLETSPEED = 5;
@@ -12,6 +11,9 @@ Button introButton;
 Button storyButton;
 Button returnButton;
 
+//scoring etc
+int money;
+
 
 // ====================== colors 
 color green     = #31710D;
@@ -22,6 +24,7 @@ color brown     =  #812828;
 color darkBlue  = #1D0B67;
 color black     = #000000;
 color white     = #FFFFFF;
+color grey      = #BFBBBB;
 color northRoom, eastRoom, southRoom, westRoom;
 
 //======================================= mode framework and controls
@@ -60,6 +63,8 @@ PImage doorE;
 PImage doorS;
 PImage doorW;
 PImage potion;
+PImage shield, shieldcount, poison, coin, rock, stake;
+PImage Pause;
 
 //fonts ================
 PFont iFont;
@@ -79,6 +84,8 @@ void setup() {
   storyButton  = new Button(iFont, "Enter", 400, 530, 300, 100, black, white);
   returnButton  = new Button(iFont, "RETURN", 400, 530, 300, 100, black, white);
 
+//scoring etc
+money = 5;
 
   // ==================== fonts and images
   iFont = createFont("OldLondon.ttf", 100);
@@ -94,7 +101,13 @@ void setup() {
   doorS = loadImage("doorS.png");
   doorW = loadImage("doorW.png");
   potion = loadImage("health4.png");
-
+  shield = loadImage("shield.png");
+  shieldcount = loadImage("shieldcount.png");
+  poison = loadImage("poison.png");
+  Pause = loadImage("pause.png");
+  coin = loadImage("coin2.png");
+  rock = loadImage("rock.png");
+  stake = loadImage("stake.png");
 
   //================= objects
   myHero = new Hero();

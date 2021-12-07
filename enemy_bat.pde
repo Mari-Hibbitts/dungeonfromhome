@@ -18,10 +18,6 @@ class Bat extends Enemy {
   void act() {
     super.act();
 
-    if (hp <=0) {
-      myObjects.add(new droppedItem(loc.x, loc.y, roomX, roomY));
-    }
-
     if (dist(loc.x, loc.y, myHero.loc.x, myHero.loc.y) < 100) {
       myHero.hp--;
     }
@@ -58,6 +54,10 @@ class Bat extends Enemy {
       }
 
       i++;
+    }
+
+    if (hp <=0) {
+      myObjects.add(new droppedItem(loc.x, loc.y, roomX, roomY));
     }
   }
 }

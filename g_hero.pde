@@ -1,5 +1,5 @@
 class Hero extends GameObjects {
-  float speed;
+
   Weapon myWeapon;
   AnimatedGif currentAction;
   boolean immune;
@@ -94,5 +94,6 @@ class Hero extends GameObjects {
     if (hp <=0) {
       mode = GAMEOVER;
     }
+    if (hp >=100) hp = 100;
   }
 }
