@@ -6,31 +6,31 @@ class AnimatedGif {
   int rate;
 
 
-  AnimatedGif(int nf, /*int r,*/  String before, String after) {
+  AnimatedGif(int nf, int r,  String before, String after) {
 
     numFrames = nf;
     gif = new PImage [numFrames];
     frame = 0;
-    //  rate = r;
+    rate = r;
 
     while (frame < numFrames) {
       gif[frame] = loadImage(before +frame+ after);
-      //  if (numFrames % rate == 0) frame++;
-      frame++;
+   
+     frame++;
     }
   }
 
   void show() {
     if (frame >= numFrames) frame = 0;
     image(gif[frame], 0, 0, width, height);
-    // if (numFrames % rate == 0) frame++;
-    frame++;
+     if (frameCount % rate == 0) frame++;
+ //   frame++;
   }
 
   void show(float x, float y, float w, float h) {
     if (frame >= numFrames) frame = 0;
     image(gif[frame], x, y, w, h);
-    //if (numFrames % rate == 0) frame++;
-    frame++;
+    if (frameCount % rate == 0) frame++;
+   // frame++;
   }
 }

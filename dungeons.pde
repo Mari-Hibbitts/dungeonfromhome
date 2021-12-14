@@ -72,21 +72,21 @@ PImage doorS;
 PImage doorW;
 PImage potion;
 PImage shield, shieldcount, poison, coin, rock, stake;
-PImage Pause, gameover, YGOR, VERA, KARL, MARY;
+PImage Pause, gameover, YGOR, VERA, KARL, MARY, graves;
 
 //fonts ================
 PFont iFont, yFont;
 
 
 void setup() {
-  mode = NAMESELECT;
+  mode = GAMEOVER;
   size(800, 600, FX2D);
-  Giff = new AnimatedGif(247, "gif1/frame_", "_delay-0.04s.png" );
-  spriteUp = new AnimatedGif (4, "sprite/up/sprite_", ".png");
-  spriteDown = new AnimatedGif (4, "sprite/down/sprite_", ".png");
-  spriteLeft = new AnimatedGif (4, "sprite/left/sprite_", ".png");
-  spriteRight = new AnimatedGif (4, "sprite/right/sprite_", ".png");
-  grass = new AnimatedGif (6, "frame_", "_delay-0.13s.gif");
+  Giff = new AnimatedGif(247, 10,  "gif1/frame_", "_delay-0.04s.png" );
+  spriteUp = new AnimatedGif (4, 10, "sprite/up/sprite_", ".png");
+  spriteDown = new AnimatedGif (4,10, "sprite/down/sprite_", ".png");
+  spriteLeft = new AnimatedGif (4,10, "sprite/left/sprite_", ".png");
+  spriteRight = new AnimatedGif (4, 10,"sprite/right/sprite_", ".png");
+  grass = new AnimatedGif (6, 7,"frame_", "_delay-0.13s.gif");
 
   //============================= buttons
   introButton   = new Button(iFont, "Begin", 400, 530, 300, 100, black, white);
@@ -132,6 +132,7 @@ void setup() {
   YGOR = loadImage("YGOR.png");
   KARL = loadImage("KARL.png");
   MARY = loadImage("MARY.png");
+  graves = loadImage("graves.png");
   //================= objects
   myHero = new Hero();
   myObjects = new ArrayList<GameObjects>();
