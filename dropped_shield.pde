@@ -21,7 +21,7 @@ class droppedItemshield extends GameObjects {
   }
 
   void act() {
- 
+
     timer++;
     if (timer > 500) {
       hp = 0;
@@ -31,9 +31,9 @@ class droppedItemshield extends GameObjects {
     if (dist(loc.x, loc.y, myHero.loc.x, myHero.loc.y)< size/2 + myHero.size/2) {
       image(shieldcount, 50, -10, 120, 120);
       myHero.immune = true;
-     loc = new PVector(-1000, -176);
-      if (myHero.immunetime >= 100){
-     // hp = 0;
+      loc = new PVector(-1000, -176);
+      if (myHero.immunetime >= 100) {
+         hp = 0;
       }
     }
   }

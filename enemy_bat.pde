@@ -52,12 +52,13 @@ class Bat extends Enemy {
           }
         }
       }
-
       i++;
     }
 
     if (hp <=0) {
       myObjects.add(new droppedItem(loc.x, loc.y, roomX, roomY));
+      money = money + 10;
+        myObjects.add(new Message(400, 300, 5));
     }
   }
 }

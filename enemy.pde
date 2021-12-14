@@ -7,7 +7,6 @@ class Enemy extends GameObjects {
     roomX = 1;
     roomY = 1;
     size = 45;
-
   }
 
   Enemy(int _hp, int s, int x, int y) {
@@ -32,9 +31,12 @@ class Enemy extends GameObjects {
 
   void act() {
     super.act();
-    
+
     //money
-    if (hp <=0) money = money + 1;
+    if (hp <=0) {
+      money = money + 1;
+      myObjects.add(new Message(400, 300, 5));
+    }
     if (myHero.immune == false) {
       if (dist(loc.x, loc.y, myHero.loc.x, myHero.loc.y)< size/2+myHero.size/2 && roomX == myHero.roomX && roomY == myHero.roomY) {
         if (vel.mag() > 0) myHero.hp = myHero.hp - int(vel.mag());
@@ -52,7 +54,5 @@ class Enemy extends GameObjects {
       }
       i++;
     }
-
-    
   }
 }

@@ -5,7 +5,7 @@ class Bullet extends GameObjects {
   int timer;
   PImage weaponType;
 
-  Bullet(PVector _aim, color _c, int _s) {
+  Bullet(PVector _aim, color _c, int _s, PImage _weapon) {
     super();
     timer = 90;
     c = _c;
@@ -16,7 +16,7 @@ class Bullet extends GameObjects {
     vel.setMag(5);
     roomX = myHero.roomX;
     roomY = myHero.roomY;
-    weaponType = loadImage("rock.png");
+    weaponType = _weapon;
   }
 
   void show() {
@@ -30,6 +30,8 @@ class Bullet extends GameObjects {
     if (timer == 0) {
       hp = 0;
     }
+
+    if (weaponType == stake) myHero.damage = 10;
     //collision (different from gameobject)
     if (loc.x > 700) hp = 0;
     if (loc.x < 103)hp= 0;

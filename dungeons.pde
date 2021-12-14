@@ -11,6 +11,11 @@ Button introButton;
 Button storyButton;
 Button returnButton;
 Button PressDAMAGE, PressSPEED, PressHP, PressEXIT;
+Button Ygor, Mary, Karl, Vera;
+Button BEGIN;
+
+//character name 
+int name;
 
 //scoring etc
 int money;
@@ -33,10 +38,11 @@ color northRoom, eastRoom, southRoom, westRoom;
 int mode;
 final int INTRO = 0;
 final int STORYINTRO = 1;
-final int MOUSE = 2;
-final int GAME = 3;
-final int PAUSE = 4;
-final int GAMEOVER = 5;
+final int NAMESELECT = 2;
+final int MOUSE = 3;
+final int GAME = 4;
+final int PAUSE = 5;
+final int GAMEOVER = 6;
 boolean wkey, skey, akey, dkey, spacekey, select, pause, mapkey;
 
 // =============================== objects
@@ -51,6 +57,7 @@ AnimatedGif spriteUp;
 AnimatedGif spriteDown;
 AnimatedGif spriteLeft;
 AnimatedGif spriteRight;
+AnimatedGif grass;
 PImage room;
 PImage floor;
 PImage card1;
@@ -65,36 +72,42 @@ PImage doorS;
 PImage doorW;
 PImage potion;
 PImage shield, shieldcount, poison, coin, rock, stake;
-PImage Pause;
+PImage Pause, gameover, YGOR, VERA, KARL, MARY;
 
 //fonts ================
-PFont iFont;
+PFont iFont, yFont;
 
 
 void setup() {
-  mode = PAUSE;
+  mode = NAMESELECT;
   size(800, 600, FX2D);
   Giff = new AnimatedGif(247, "gif1/frame_", "_delay-0.04s.png" );
   spriteUp = new AnimatedGif (4, "sprite/up/sprite_", ".png");
   spriteDown = new AnimatedGif (4, "sprite/down/sprite_", ".png");
   spriteLeft = new AnimatedGif (4, "sprite/left/sprite_", ".png");
   spriteRight = new AnimatedGif (4, "sprite/right/sprite_", ".png");
+  grass = new AnimatedGif (6, "frame_", "_delay-0.13s.gif");
 
   //============================= buttons
   introButton   = new Button(iFont, "Begin", 400, 530, 300, 100, black, white);
   storyButton   = new Button(iFont, "Enter", 400, 530, 300, 100, black, white);
   returnButton  = new Button(iFont, "RETURN", 400, 530, 300, 100, black, white);
-  PressDAMAGE        = new Button (iFont, "+", 90, 240, 30, 30, black, white);
-  PressSPEED        = new Button (iFont, "+", 90, 340, 30, 30, black, white);
-  PressHP        = new Button (iFont, "+", 90, 440, 30, 30, black, white);
-  PressEXIT      = new Button (iFont, "x", 700, 220, 100, 100, black, white);
-
+  PressDAMAGE   = new Button (iFont, "+", 90, 240, 30, 30, black, white);
+  PressSPEED    = new Button (iFont, "+", 90, 340, 30, 30, black, white);
+  PressHP       = new Button (iFont, "+", 90, 440, 30, 30, black, white);
+  PressEXIT     = new Button (iFont, "x", 700, 220, 100, 100, black, white);
+  Ygor          = new Button (yFont, "Ygor", 250, 200, 200, 70, black, white);
+  Mary          = new Button (yFont, "Mary", 550, 200, 200, 70, black, white);
+  Karl          = new Button (yFont, "Karl", 250, 300, 200, 70, black, white);
+  Vera          = new Button (yFont, "Vera", 550, 300, 200, 70, black, white);
+  BEGIN         = new Button(iFont, "BEGIN", 400, 530, 300, 100, black, white);
 
   //scoring etc
   money = 5;
 
   // ==================== fonts and images
-  iFont = createFont("OldLondon.ttf", 100);
+  iFont = createFont("OldLondon.ttf", 50);
+  yFont = createFont("yFont.otf", 50);
   room = loadImage("room.png");
   floor = loadImage("floor.png");
   card1 = loadImage("card1.png");
@@ -114,12 +127,17 @@ void setup() {
   coin = loadImage("coin2.png");
   rock = loadImage("rock.png");
   stake = loadImage("stake.png");
-
+  gameover = loadImage("gameover.png");
+  VERA  = loadImage("VERA.png");
+  YGOR = loadImage("YGOR.png");
+  KARL = loadImage("KARL.png");
+  MARY = loadImage("MARY.png");
   //================= objects
   myHero = new Hero();
   myObjects = new ArrayList<GameObjects>();
   myObjects.add(myHero);
   myObjects.add(new Follower (150, 1, 2, width/2, height/2));
+
 
   //darkness
 
@@ -173,7 +191,7 @@ void draw() {
     mode = STORYINTRO;
   }
   if (storyButton.clicked) {
-    mode = GAME;
+    mode = NAMESELECT;
   }
 
 
@@ -192,6 +210,8 @@ void draw() {
     gameover();
   } else if (mode == STORYINTRO) {
     storyIntro();
+  } else if (mode == NAMESELECT) {
+    name();
   } else {
     println("Error: Mode = " + mode);
   }

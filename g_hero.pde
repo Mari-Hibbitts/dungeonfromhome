@@ -5,7 +5,7 @@ class Hero extends GameObjects {
   boolean immune;
   int immunetime = 0;
   color c;
-  
+
   Hero() {
     super();
     hpMAX = hp = 100;
@@ -13,7 +13,7 @@ class Hero extends GameObjects {
     speed = 5;
     damage = 5;
     roomX = 1;
-    roomY = 1;
+    roomY = 3;
     size = 40;
     c = green;
     immune = false;
@@ -73,22 +73,26 @@ class Hero extends GameObjects {
     if (northRoom!=#FFFFFF && loc.x > 371 && loc.x < 428 && loc.y == 103) {
       roomY--;
       loc = new PVector (width/2, 497);
+      cleanUp();
     }
 
     if (eastRoom!=#FFFFFF && loc.y > 262 && loc.y < 327 && loc.x == 687) {
 
       roomX++;
       loc = new PVector (113, height/2);
+      cleanUp();
     }
 
     if (southRoom!=#FFFFFF && loc.x > 375 && loc.x < 432 && loc.y == 496) {
       roomY++;
       loc = new PVector (width/2, 103);
+      cleanUp();
     }
 
     if (westRoom!=#FFFFFF && loc.y > 270 && loc.y < 328 && loc.x == 112) {
       roomX--;
       loc = new PVector (687, height/2);
+      cleanUp();
     }
     myWeapon.update();
     if (spacekey) myWeapon.shoot();
@@ -97,5 +101,19 @@ class Hero extends GameObjects {
       mode = GAMEOVER;
     }
     if (hp > hpMAX) hp = hpMAX;
+  }
+
+  void cleanUp() {
+    int i = 0;
+    while (i < myObjects.size()) {
+      GameObjects obj =  myObjects.get(i);
+      if ( obj instanceof Bullet || obj instanceof Message) {
+        if (!inRoomWith(obj)) {
+          myObjects.remove(i);
+          i--;
+        }
+      }
+      i++;
+    }
   }
 }

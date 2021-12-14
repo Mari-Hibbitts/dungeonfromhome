@@ -1,7 +1,7 @@
 class Rifle extends Weapon {
 
   Rifle() {
-    super(100, 20);
+    super(100, 365);
   }
 }
 
@@ -15,7 +15,7 @@ class AutoPistol extends Weapon {
 class ShotGun extends Weapon {
 
   ShotGun() {
-    super(100, 5);
+    super(SHOTGUN_THRESHOLD, SHOTGUN_BULLETSPEED);
   }
   void shoot() {
     if (shotTimer >= threshold) {
@@ -23,7 +23,7 @@ class ShotGun extends Weapon {
         PVector aimVector =new PVector (mouseX - myHero.loc.x, mouseY-myHero.loc.y);
         aimVector.rotate (random(-PI, PI));
         aimVector.setMag(bulletSpeed);
-        myObjects.add(new Bullet (aimVector, black, 10));
+        myObjects.add(new Bullet (aimVector, black, 10, rock));
       }
       shotTimer = 0;
     }

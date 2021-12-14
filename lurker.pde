@@ -1,4 +1,3 @@
-
 class Lurker extends Enemy {
   Lurker(int x, int y, int locx, int locy) {
     super(176, 50, x, y);
@@ -19,6 +18,11 @@ class Lurker extends Enemy {
     if (dist(myHero.loc.x, myHero.loc.y, loc.x, loc.y)< 100) {
       vel = new PVector(myHero.loc.x - loc.x, myHero.loc.y - loc.y);
       vel.setMag(1);
+    }
+
+    if (hp <=0) {
+      myObjects.add(new Message(loc.x, loc.y, 5));
+      myObjects.add(new droppedItempoison(loc.x, loc.y, roomX, roomY));
     }
   }
 }

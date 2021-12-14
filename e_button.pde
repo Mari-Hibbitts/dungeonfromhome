@@ -7,6 +7,7 @@ class Button {
   PFont font;
 
   Button(PFont _font, String t, int _x, int _y, int _w, int _h, color norm, color high) {
+   font = _font;
     x = _x;
     y = _y;
     w = _w;
@@ -15,7 +16,10 @@ class Button {
     highlight = high;
     normal = norm;
     clicked = false;
-    font = _font;
+    
+iFont = createFont("OldLondon.ttf", 50);
+  yFont = createFont("yFont.otf", 50);
+
   }
 
   void show() {
@@ -40,8 +44,8 @@ class Button {
       fill(highlight);
     }
     textSize(w);
-    textFont(iFont);
-    text(text, x, y-10);
+    textFont(font);
+    text(text, x, y-5);
 
     if (mouseReleased && mouseX > x-w/2 && mouseX < x+w/2 && mouseY > y-h/2 && mouseY < y+h/2) {
       clicked  = true;
